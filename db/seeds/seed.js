@@ -23,7 +23,7 @@ const seed = ({ productData }) => {
 
     .then(() => {
       const insertProductsQueryStr = format(
-        "INSERT INTO products (productName, productType, productPrice, productImage1, productImage2, productImage3, productImage4, about) VALUES %L;",
+        "INSERT INTO products ( productName, productType, productPrice, productImage1, productImage2, productImage3, productImage4, about) VALUES %L;",
         productData.map(
           ({
             productName,
