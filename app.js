@@ -10,4 +10,8 @@ app.use(express.json());
 
 app.get("/api/products", getProducts);
 
+app.all("*", (req, res) => {
+  res.status(404).send({ message: "endpoint not found!" });
+});
+
 module.exports = app;
