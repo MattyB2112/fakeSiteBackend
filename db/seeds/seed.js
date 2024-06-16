@@ -8,6 +8,7 @@ const seed = ({ productData }) => {
     .then(() => {
       const productsTablePromise = db.query(`
         CREATE TABLE products (
+          product_id SERIAL PRIMARY KEY,
           productName VARCHAR,
           productType VARCHAR,
           productCategory VARCHAR,
@@ -24,7 +25,7 @@ const seed = ({ productData }) => {
 
     .then(() => {
       const insertProductsQueryStr = format(
-        "INSERT INTO products ( productName, productType, productCategory, productPrice, productImage1, productImage2, productImage3, productImage4, about) VALUES %L;",
+        "INSERT INTO products (productName, productType, productCategory, productPrice, productImage1, productImage2, productImage3, productImage4, about) VALUES %L;",
         productData.map(
           ({
             productName,

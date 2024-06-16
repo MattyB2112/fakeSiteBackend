@@ -19,7 +19,17 @@ describe("/api/products", () => {
       .get("/api/products")
       .expect(200)
       .then(({ body }) => {
-        console.log("HELLO");
+        console.log(body.products);
+      });
+  });
+});
+describe.only("/api/:product_id", () => {
+  test("returns a status 200 and relevant product info", () => {
+    return request(app)
+      .get("/api/1")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.product);
       });
   });
 });
