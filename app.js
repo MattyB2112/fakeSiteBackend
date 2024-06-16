@@ -8,6 +8,8 @@ app.use(cors());
 
 app.use(express.json());
 
+app.get("/", (req, res) => res.send("Hello World!"));
+
 app.get("/api/products", getProducts);
 
 app.all("*", (req, res) => {
