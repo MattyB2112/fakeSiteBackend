@@ -10,6 +10,7 @@ const seed = ({ productData }) => {
         CREATE TABLE products (
           productName VARCHAR,
           productType VARCHAR,
+          productCategory VARCHAR,
           productPrice NUMERIC,
           productImage1 VARCHAR,
           productImage2 VARCHAR,
@@ -23,11 +24,12 @@ const seed = ({ productData }) => {
 
     .then(() => {
       const insertProductsQueryStr = format(
-        "INSERT INTO products ( productName, productType, productPrice, productImage1, productImage2, productImage3, productImage4, about) VALUES %L;",
+        "INSERT INTO products ( productName, productType, productCategory, productPrice, productImage1, productImage2, productImage3, productImage4, about) VALUES %L;",
         productData.map(
           ({
             productName,
             productType,
+            productCategory,
             productPrice,
             productImage1,
             productImage2,
@@ -37,6 +39,7 @@ const seed = ({ productData }) => {
           }) => [
             productName,
             productType,
+            productCategory,
             productPrice,
             productImage1,
             productImage2,

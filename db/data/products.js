@@ -2,6 +2,7 @@ module.exports = [
   {
     productName: "Nike Air Max Plus",
     productType: "footwear",
+    productCategory: "men",
     productPrice: 174.99,
     productImage1:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/pwyyr3flqymevd6qvcfr/air-max-plus-shoes-zdrJWg.png",
@@ -17,6 +18,7 @@ module.exports = [
   {
     productName: "Nike Air Presto",
     productType: "footwear",
+    productCategory: "men",
     productPrice: 69.99,
     productImage1:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/071b624e-3ff8-4415-beb0-bea9bc3f8364/air-presto-shoes-m6pTVH.png",
@@ -32,12 +34,13 @@ module.exports = [
   {
     productName: "Nike Dunk Low",
     productType: "footwear",
+    productCategory: "men",
     productPrice: 109.99,
     productImage1:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/a4114e49-2fe9-40a9-b20b-fd960432d780/dunk-low-shoes-15mQNw.png",
     productImage2:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c536e339-cc8b-42cb-96d9-a92a71b5d91c/dunk-low-shoes-15mQNw.png",
-    prductImage3:
+    productImage3:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7dc96955-3d78-4739-baa6-0aee13423a48/dunk-low-shoes-15mQNw.png",
     productImage4:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c5799667-2a3d-4461-8c09-817f8fdad377/dunk-low-shoes-15mQNw.png",
