@@ -19,7 +19,7 @@ describe("/api/products", () => {
       .get("/api/products")
       .expect(200)
       .then(({ body }) => {
-        console.log(body.products);
+        console.log("HELLO");
       });
   });
 });
