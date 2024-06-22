@@ -1,9 +1,12 @@
 const format = require("pg-format");
 const db = require("../connection");
 
-const seed = ({ productData }) => {
+const seed = ({ productData, usersData }) => {
   return db
     .query(`DROP TABLE IF EXISTS products;`)
+    .then(() => {
+      return db.query(`DROP TABLE IF EXISTS users;`);
+    })
 
     .then(() => {
       const productsTablePromise = db.query(`
@@ -20,7 +23,21 @@ const seed = ({ productData }) => {
           about VARCHAR
         );`);
 
-      return Promise.all([productsTablePromise]);
+      const usersTablePromise = db.query(`
+        CREATE TABLE users (
+          user_id SERIAL PRIMARY KEY,
+          userFirstName VARCHAR,
+          userLastName VARCHAR,
+          userEmail VARCHAR,
+          userImage VARCHAR DEFAULT 'https://images.pexels.com/photos/97050/pexels-photo-97050.jpeg?w=700&h=700',
+          userAddress1 VARCHAR,
+          userAddress2 VARCHAR,
+          userAddress3 VARCHAR,
+          userPostcode VARCHAR,
+          userSince TIMESTAMP DEFAULT NOW ()
+        );`);
+
+      return Promise.all([productsTablePromise, usersTablePromise]);
     })
 
     .then(() => {
@@ -52,7 +69,35 @@ const seed = ({ productData }) => {
       );
       const productsPromise = db.query(insertProductsQueryStr);
 
-      return Promise.all([productsPromise]);
+      const insertUsersQueryStr = format(
+        "INSERT INTO users (userFirstName, userLastName, userEmail, userImage, userAddress1, userAddress2, userAddress3, userPostcode, userSince) VALUES %L;",
+        usersData.map(
+          ({
+            userFirstName,
+            userLastName,
+            userEmail,
+            userImage,
+            userAddress1,
+            userAddress2,
+            userAddress3,
+            userPostcode,
+            userSince,
+          }) => [
+            userFirstName,
+            userLastName,
+            userEmail,
+            userImage,
+            userAddress1,
+            userAddress2,
+            userAddress3,
+            userPostcode,
+            userSince,
+          ]
+        )
+      );
+      const usersPromise = db.query(insertUsersQueryStr);
+
+      return Promise.all([productsPromise, usersPromise]);
     });
 };
 
