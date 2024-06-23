@@ -65,8 +65,7 @@ describe("/api/users/:user_id/basket", () => {
       .send(itemToAdd)
       .expect(201)
       .then(({ body }) => {
-        const addedItem = body.product_id;
-        console.log(addedItem, "<--ADDED ITEM ID");
+        console.log(body.product_id);
       });
   });
 });

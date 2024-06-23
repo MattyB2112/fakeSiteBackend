@@ -13,7 +13,6 @@ exports.fetchBasket = (id) => {
 
 exports.addToBasket = (productObj, user_id) => {
   const { product_id } = productObj;
-  console.log(product_id, "MODEL LINE 16");
   return db
     .query(`SELECT * FROM users WHERE user_id = $1`, [user_id])
     .then(({ rows }) => {
