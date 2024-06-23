@@ -57,7 +57,7 @@ describe("/api/users/:user_id/basket", () => {
   });
 });
 
-describe.only("/api/users/:user_id/basket", () => {
+describe("/api/users/:user_id/basket", () => {
   test("adds item to basket", () => {
     const itemToAdd = { product_id: 1 };
     return request(app)

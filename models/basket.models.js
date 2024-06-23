@@ -11,7 +11,9 @@ exports.fetchBasket = (id) => {
     });
 };
 
-exports.addToBasket = (item_id, user_id) => {
+exports.addToBasket = (productObj, user_id) => {
+  const { product_id } = productObj;
+  console.log(product_id, "MODEL LINE 16");
   return db
     .query(`SELECT * FROM users WHERE user_id = $1`, [user_id])
     .then(({ rows }) => {
@@ -19,7 +21,7 @@ exports.addToBasket = (item_id, user_id) => {
         return Promise.reject({ status: 404, message: "username not found" });
       } else
         return db
-          .query(`SELECT * FROM products WHERE product_id = $1`, [item_id])
+          .query(`SELECT * FROM products WHERE product_id = $1`, [product_id])
           .then(({ rows }) => {
             if (rows.length === 0) {
               return Promise.reject({
@@ -30,7 +32,7 @@ exports.addToBasket = (item_id, user_id) => {
               return db
                 .query(
                   "INSERT INTO baskets (user_id, product_id) VALUES ($1, $2) RETURNING *;",
-                  [user_id, item_id]
+                  [user_id, product_id]
                 )
                 .then(({ rows }) => {
                   return rows[0];
