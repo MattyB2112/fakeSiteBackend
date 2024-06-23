@@ -28,6 +28,18 @@ app.get("/api/users/:user_id/basket", getBasket);
 
 app.post("/api/users/:user_id/basket", postToBasket);
 
+app.use((err, req, res, next) => {
+  if (err.status && err.message) {
+    res.status(err.status).send({ message: err.message });
+  } else if ((err.code = "42703")) {
+    res.status(400).send({ message: "bad request" });
+  } else console.log(err);
+});
+
+app.all("*", (req, res) => {
+  res.status(404).send({ message: "endpoint not found!" });
+});
+
 app.all("*", (req, res) => {
   res.status(404).send({ message: "endpoint not found!" });
 });

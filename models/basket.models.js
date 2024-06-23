@@ -5,7 +5,7 @@ exports.fetchBasket = (id) => {
     .query(`SELECT * FROM baskets WHERE user_id = $1`, [id])
     .then(({ rows }) => {
       if (rows.length === 0) {
-        return Promise.reject({ status: 404, message: "not found" });
+        return Promise.reject({ status: 404, message: "no items in basket" });
       }
       return rows;
     });
@@ -25,7 +25,7 @@ exports.addToBasket = (item_id, user_id) => {
             if (rows.length === 0) {
               return Promise.reject({
                 status: 404,
-                message: "article not found",
+                message: "product not found",
               });
             } else
               return db

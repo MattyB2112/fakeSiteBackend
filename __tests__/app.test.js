@@ -57,13 +57,13 @@ describe("/api/users/:user_id/basket", () => {
   });
 });
 
-describe.only("/api/users/:user_id/basket", () => {
+describe("/api/users/:user_id/basket", () => {
   test("adds item to basket", () => {
     const itemToAdd = { item_id: 1 };
     return request(app)
       .post("/api/users/1/basket")
       .send(itemToAdd)
-      .expect(200)
+      .expect(201)
       .then(({ body }) => {
         const addedItem = body.itemToAdd;
         console.log(body);
@@ -71,7 +71,7 @@ describe.only("/api/users/:user_id/basket", () => {
   });
 });
 
-describe.only("/api/users/:user_id/basket", () => {
+describe("/api/users/:user_id/basket", () => {
   test("returns a status 200 and user basket", () => {
     return request(app)
       .get("/api/users/1/basket")
