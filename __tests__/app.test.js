@@ -23,13 +23,25 @@ describe("/api/products", () => {
       });
   });
 });
-describe.only("/api/:product_id", () => {
+describe("/api/:product_id", () => {
   test("returns a status 200 and relevant product info", () => {
     return request(app)
-      .get("/api/1")
+      .get("/api/products/1")
       .expect(200)
       .then(({ body }) => {
         console.log(body.product);
+      });
+  });
+});
+
+//USERS
+describe.only("/api/:user_id", () => {
+  test("returns a status 200 and relevant user info", () => {
+    return request(app)
+      .get("/api/users/1")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.user);
       });
   });
 });

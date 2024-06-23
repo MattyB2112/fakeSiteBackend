@@ -4,6 +4,7 @@ const {
   getProducts,
   getProductById,
 } = require("./controllers/products.controllers.js");
+const { getUserById } = require("./controllers/users.controllers.js");
 const app = express();
 const apiRouter = require("./api-router.js");
 
@@ -15,7 +16,9 @@ app.get("/", (req, res) => res.send("Hello World!"));
 
 app.get("/api/products", getProducts);
 
-app.get("/api/:product_id", getProductById);
+app.get("/api/products/:product_id", getProductById);
+
+app.get("/api/users/:user_id", getUserById);
 
 app.all("*", (req, res) => {
   res.status(404).send({ message: "endpoint not found!" });

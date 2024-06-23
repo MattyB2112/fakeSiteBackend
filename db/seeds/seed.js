@@ -1,11 +1,14 @@
 const format = require("pg-format");
 const db = require("../connection");
+const { convertTimestampToDate } = require("./utils");
 
-const seed = ({ productData, usersData }) => {
+const seed = ({ productData, usersData, basketsData }) => {
   return db
-    .query(`DROP TABLE IF EXISTS products;`)
+    .query(`DROP TABLE IF EXISTS baskets;`)
     .then(() => {
-      return db.query(`DROP TABLE IF EXISTS users;`);
+      return db.query(`DROP TABLE IF EXISTS users;`).then(() => {
+        return db.query(`DROP TABLE IF EXISTS products;`);
+      });
     })
 
     .then(() => {
@@ -34,10 +37,17 @@ const seed = ({ productData, usersData }) => {
           userAddress2 VARCHAR,
           userAddress3 VARCHAR,
           userPostcode VARCHAR,
-          userSince TIMESTAMP DEFAULT NOW ()
+          userSince TIMESTAMP
         );`);
 
       return Promise.all([productsTablePromise, usersTablePromise]);
+    })
+    .then(() => {
+      return db.query(`
+  CREATE TABLE baskets (
+    user_id INT REFERENCES users(user_id),
+    basketSize INT
+  );`);
     })
 
     .then(() => {
@@ -69,9 +79,11 @@ const seed = ({ productData, usersData }) => {
       );
       const productsPromise = db.query(insertProductsQueryStr);
 
+      const formattedUsersData = usersData.map(convertTimestampToDate);
+
       const insertUsersQueryStr = format(
         "INSERT INTO users (userFirstName, userLastName, userEmail, userImage, userAddress1, userAddress2, userAddress3, userPostcode, userSince) VALUES %L;",
-        usersData.map(
+        formattedUsersData.map(
           ({
             userFirstName,
             userLastName,
@@ -95,9 +107,17 @@ const seed = ({ productData, usersData }) => {
           ]
         )
       );
+
       const usersPromise = db.query(insertUsersQueryStr);
 
-      return Promise.all([productsPromise, usersPromise]);
+      const insertBasketsQueryStr = format(
+        "INSERT INTO baskets (user_id, basketSize) VALUES %L;",
+        basketsData.map(({ user_id, basketSize }) => [user_id, basketSize])
+      );
+
+      const basketsPromise = db.query(insertBasketsQueryStr);
+
+      return Promise.all([productsPromise, usersPromise, basketsPromise]);
     });
 };
 

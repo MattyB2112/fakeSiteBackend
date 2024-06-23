@@ -9,5 +9,6 @@ module.exports = [
     userAddress2: "Arizona",
     userAddress3: "USA",
     userPostcode: "MUR IC4",
+    userSince: Date.now(),
   },
 ];
