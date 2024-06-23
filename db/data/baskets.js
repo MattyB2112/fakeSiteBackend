@@ -1,6 +1,6 @@
 module.exports = [
   {
     user_id: 1,
-    basketSize: 0,
+    product_id: 1,
   },
 ];

@@ -46,7 +46,7 @@ const seed = ({ productData, usersData, basketsData }) => {
       return db.query(`
   CREATE TABLE baskets (
     user_id INT REFERENCES users(user_id),
-    basketSize INT
+    product_id INT REFERENCES products(product_id)
   );`);
     })
 
@@ -110,14 +110,14 @@ const seed = ({ productData, usersData, basketsData }) => {
 
       const usersPromise = db.query(insertUsersQueryStr);
 
-      const insertBasketsQueryStr = format(
-        "INSERT INTO baskets (user_id, basketSize) VALUES %L;",
-        basketsData.map(({ user_id, basketSize }) => [user_id, basketSize])
-      );
+      // const insertBasketsQueryStr = format(
+      //   "INSERT INTO baskets (user_id, product_id) VALUES %L;",
+      //   basketsData.map(({ user_id, product_id }) => [user_id, product_id])
+      // );
 
-      const basketsPromise = db.query(insertBasketsQueryStr);
+      // const basketsPromise = db.query(insertBasketsQueryStr);
 
-      return Promise.all([productsPromise, usersPromise, basketsPromise]);
+      return Promise.all([productsPromise, usersPromise]);
     });
 };
 

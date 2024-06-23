@@ -9,9 +9,9 @@ afterAll(() => {
   return db.end();
 });
 
-beforeEach(() => {
-  return seed(data);
-});
+// beforeEach(() => {
+//   return seed(data);
+// });
 
 describe("/api/products", () => {
   test("returns a status 200 and all product info", () => {
@@ -35,13 +35,49 @@ describe("/api/:product_id", () => {
 });
 
 //USERS
-describe.only("/api/:user_id", () => {
+describe("/api/:user_id", () => {
   test("returns a status 200 and relevant user info", () => {
     return request(app)
       .get("/api/users/1")
       .expect(200)
       .then(({ body }) => {
         console.log(body.user);
+      });
+  });
+});
+
+describe("/api/users/:user_id/basket", () => {
+  test("returns a status 200 and user basket", () => {
+    return request(app)
+      .get("/api/users/1/basket")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.basket);
+      });
+  });
+});
+
+describe.only("/api/users/:user_id/basket", () => {
+  test("adds item to basket", () => {
+    const itemToAdd = { item_id: 1 };
+    return request(app)
+      .post("/api/users/1/basket")
+      .send(itemToAdd)
+      .expect(200)
+      .then(({ body }) => {
+        const addedItem = body.itemToAdd;
+        console.log(body);
+      });
+  });
+});
+
+describe.only("/api/users/:user_id/basket", () => {
+  test("returns a status 200 and user basket", () => {
+    return request(app)
+      .get("/api/users/1/basket")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.basket);
       });
   });
 });

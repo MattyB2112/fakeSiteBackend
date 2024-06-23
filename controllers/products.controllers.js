@@ -1,5 +1,3 @@
-const db = require("../db/connection.js");
-const fs = require("fs/promises");
 const {
   fetchProducts,
   fetchProductById,
@@ -14,6 +12,7 @@ exports.getProducts = (req, res) => {
 exports.getProductById = (req, res) => {
   const id = req.params.product_id;
   fetchProductById(id).then((product) => {
+    console.log(product);
     res.status(200).send({ product: product });
   });
 };
