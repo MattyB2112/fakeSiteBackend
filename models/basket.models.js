@@ -12,7 +12,6 @@ exports.fetchBasket = (id) => {
 };
 
 exports.addToBasket = (item_id, user_id) => {
-  console.log(item_id, user_id);
   return db
     .query(`SELECT * FROM users WHERE user_id = $1`, [user_id])
     .then(({ rows }) => {

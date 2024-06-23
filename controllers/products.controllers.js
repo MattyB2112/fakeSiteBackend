@@ -15,7 +15,6 @@ exports.getProductById = (req, res, next) => {
   const id = req.params.product_id;
   fetchProductById(id)
     .then((product) => {
-      console.log(product);
       res.status(200).send({ product: product });
     })
     .catch(next);

@@ -110,14 +110,14 @@ const seed = ({ productData, usersData, basketsData }) => {
 
       const usersPromise = db.query(insertUsersQueryStr);
 
-      // const insertBasketsQueryStr = format(
-      //   "INSERT INTO baskets (user_id, product_id) VALUES %L;",
-      //   basketsData.map(({ user_id, product_id }) => [user_id, product_id])
-      // );
+      const insertBasketsQueryStr = format(
+        "INSERT INTO baskets (user_id, product_id) VALUES %L;",
+        basketsData.map(({ user_id, product_id }) => [user_id, product_id])
+      );
 
-      // const basketsPromise = db.query(insertBasketsQueryStr);
+      const basketsPromise = db.query(insertBasketsQueryStr);
 
-      return Promise.all([productsPromise, usersPromise]);
+      return Promise.all([productsPromise, usersPromise, basketsPromise]);
     });
 };
 

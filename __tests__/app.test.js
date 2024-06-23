@@ -19,7 +19,7 @@ describe("/api/products", () => {
       .get("/api/products")
       .expect(200)
       .then(({ body }) => {
-        console.log(body.products);
+        console.log("WORKS");
       });
   });
 });
@@ -29,7 +29,7 @@ describe("/api/:product_id", () => {
       .get("/api/products/1")
       .expect(200)
       .then(({ body }) => {
-        console.log(body.product);
+        console.log("WORKS");
       });
   });
 });
@@ -41,7 +41,7 @@ describe("/api/:user_id", () => {
       .get("/api/users/1")
       .expect(200)
       .then(({ body }) => {
-        console.log(body.user);
+        console.log("WORKS");
       });
   });
 });
@@ -52,21 +52,21 @@ describe("/api/users/:user_id/basket", () => {
       .get("/api/users/1/basket")
       .expect(200)
       .then(({ body }) => {
-        console.log(body.basket);
+        console.log("WORKS");
       });
   });
 });
 
-describe("/api/users/:user_id/basket", () => {
+describe.only("/api/users/:user_id/basket", () => {
   test("adds item to basket", () => {
-    const itemToAdd = { item_id: 1 };
+    const itemToAdd = { product_id: 1 };
     return request(app)
       .post("/api/users/1/basket")
       .send(itemToAdd)
       .expect(201)
       .then(({ body }) => {
-        const addedItem = body.itemToAdd;
-        console.log(body);
+        const addedItem = body.product_id;
+        console.log(addedItem, "<--ADDED ITEM ID");
       });
   });
 });

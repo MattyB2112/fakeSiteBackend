@@ -10,11 +10,13 @@ exports.getBasket = (req, res, next) => {
 };
 
 exports.postToBasket = (req, res, next) => {
-  const { item_id } = req.body;
+  const { product_id } = req.body;
+
   const { user_id } = req.params;
-  addToBasket(item_id, user_id)
-    .then(() => {
-      res.status(201).send({ item_id });
+  addToBasket(product_id, user_id)
+    .then((result) => {
+      console.log(result);
+      res.status(201).send({ product_id });
     })
     .catch(next);
 };
