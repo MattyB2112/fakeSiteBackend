@@ -11,8 +11,8 @@ exports.fetchBasket = (id) => {
     });
 };
 
-exports.addToBasket = (productObj, user_id) => {
-  const { product_id } = productObj;
+exports.addToBasket = (product_id, quantity, user_id) => {
+  console.log(product_id, quantity, user_id, "MODEL");
   return db
     .query(`SELECT * FROM users WHERE user_id = $1`, [user_id])
     .then(({ rows }) => {
@@ -30,12 +30,37 @@ exports.addToBasket = (productObj, user_id) => {
             } else
               return db
                 .query(
-                  "INSERT INTO baskets (user_id, product_id) VALUES ($1, $2) RETURNING *;",
-                  [user_id, product_id]
+                  `SELECT * FROM baskets WHERE product_id = $1 AND user_id = $2`,
+                  [product_id, user_id]
                 )
                 .then(({ rows }) => {
-                  return rows[0];
+                  if (rows.length === 0) {
+                    return db
+                      .query(
+                        "INSERT INTO baskets (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *;",
+                        [user_id, product_id, quantity]
+                      )
+                      .then(({ rows }) => {
+                        return rows[0];
+                      });
+                  } else {
+                    return db.query(
+                      `UPDATE baskets SET quantity = quantity + 1 WHERE product_id = $1 AND user_id = $2; `,
+                      [product_id, user_id]
+                    );
+                  }
                 });
           });
+    });
+};
+
+exports.removeItemFromBasket = (id) => {
+  return db
+    .query(`DELETE FROM baskets WHERE product_id = $1 RETURNING *;`, [id])
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, message: "not found" });
+      }
+      return rows[0];
     });
 };

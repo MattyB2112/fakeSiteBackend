@@ -23,7 +23,7 @@ describe("/api/products", () => {
       });
   });
 });
-describe("/api/:product_id", () => {
+describe("/api/products/:product_id", () => {
   test("returns a status 200 and relevant product info", () => {
     return request(app)
       .get("/api/products/1")
@@ -57,9 +57,9 @@ describe("/api/users/:user_id/basket", () => {
   });
 });
 
-describe("/api/users/:user_id/basket", () => {
+describe.only("/api/users/:user_id/basket", () => {
   test("adds item to basket", () => {
-    const itemToAdd = { product_id: 1 };
+    const itemToAdd = { product_id: 1, quantity: 1 };
     return request(app)
       .post("/api/users/1/basket")
       .send(itemToAdd)
@@ -70,10 +70,32 @@ describe("/api/users/:user_id/basket", () => {
   });
 });
 
-describe("/api/users/:user_id/basket", () => {
+describe.only("/api/users/:user_id/basket", () => {
   test("returns a status 200 and user basket", () => {
     return request(app)
       .get("/api/users/1/basket")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.basket);
+      });
+  });
+});
+
+describe(" PATCH /api/users/:user_id/basket", () => {
+  test("Update item quantity from user's basket", () => {
+    return request(app)
+      .patch("/api/users/1/basket")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.basket);
+      });
+  });
+});
+
+describe("DELETE /api/users/:user_id/basket", () => {
+  test("Delete item entirely from user's basket", () => {
+    return request(app)
+      .delete("/api/users/1/basket")
       .expect(200)
       .then(({ body }) => {
         console.log(body.basket);

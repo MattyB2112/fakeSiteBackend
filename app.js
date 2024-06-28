@@ -8,6 +8,7 @@ const { getUserById } = require("./controllers/users.controllers.js");
 const {
   getBasket,
   postToBasket,
+  deleteItemFromBasket,
 } = require("./controllers/basket.controllers.js");
 const app = express();
 const apiRouter = require("./api-router.js");
@@ -28,11 +29,14 @@ app.get("/api/users/:user_id/basket", getBasket);
 
 app.post("/api/users/:user_id/basket", postToBasket);
 
+app.patch("/api/users/:user_id/basket", deleteItemFromBasket);
+
 app.use((err, req, res, next) => {
   if (err.status && err.message) {
     res.status(err.status).send({ message: err.message });
   } else if ((err.code = "42703")) {
     res.status(400).send({ message: "bad request" });
+    console.log(err);
   } else console.log(err);
 });
 

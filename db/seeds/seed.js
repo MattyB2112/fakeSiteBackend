@@ -46,7 +46,8 @@ const seed = ({ productData, usersData, basketsData }) => {
       return db.query(`
   CREATE TABLE baskets (
     user_id INT REFERENCES users(user_id),
-    product_id INT REFERENCES products(product_id)
+    product_id INT REFERENCES products(product_id),
+    quantity INT
   );`);
     })
 
@@ -111,8 +112,12 @@ const seed = ({ productData, usersData, basketsData }) => {
       const usersPromise = db.query(insertUsersQueryStr);
 
       const insertBasketsQueryStr = format(
-        "INSERT INTO baskets (user_id, product_id) VALUES %L;",
-        basketsData.map(({ user_id, product_id }) => [user_id, product_id])
+        "INSERT INTO baskets (user_id, product_id, quantity) VALUES %L;",
+        basketsData.map(({ user_id, product_id, quantity }) => [
+          user_id,
+          product_id,
+          quantity,
+        ])
       );
 
       const basketsPromise = db.query(insertBasketsQueryStr);
