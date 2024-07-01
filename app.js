@@ -9,6 +9,7 @@ const {
   getBasket,
   postToBasket,
   deleteItemFromBasket,
+  patchBasket,
 } = require("./controllers/basket.controllers.js");
 const app = express();
 const apiRouter = require("./api-router.js");
@@ -29,7 +30,9 @@ app.get("/api/users/:user_id/basket", getBasket);
 
 app.post("/api/users/:user_id/basket", postToBasket);
 
-app.patch("/api/users/:user_id/basket", deleteItemFromBasket);
+app.delete("/api/users/:user_id/basket", deleteItemFromBasket);
+
+app.patch("/api/users/:user_id/basket", patchBasket);
 
 app.use((err, req, res, next) => {
   if (err.status && err.message) {
@@ -38,10 +41,6 @@ app.use((err, req, res, next) => {
     res.status(400).send({ message: "bad request" });
     console.log(err);
   } else console.log(err);
-});
-
-app.all("*", (req, res) => {
-  res.status(404).send({ message: "endpoint not found!" });
 });
 
 app.all("*", (req, res) => {

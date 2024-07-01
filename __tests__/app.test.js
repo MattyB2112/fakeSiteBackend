@@ -57,7 +57,7 @@ describe("/api/users/:user_id/basket", () => {
   });
 });
 
-describe.only("/api/users/:user_id/basket", () => {
+describe("/api/users/:user_id/basket", () => {
   test("adds item to basket", () => {
     const itemToAdd = { product_id: 1, quantity: 1 };
     return request(app)
@@ -70,7 +70,7 @@ describe.only("/api/users/:user_id/basket", () => {
   });
 });
 
-describe.only("/api/users/:user_id/basket", () => {
+describe("/api/users/:user_id/basket", () => {
   test("returns a status 200 and user basket", () => {
     return request(app)
       .get("/api/users/1/basket")
@@ -81,13 +81,15 @@ describe.only("/api/users/:user_id/basket", () => {
   });
 });
 
-describe(" PATCH /api/users/:user_id/basket", () => {
+describe.only("PATCH /api/users/:user_id/basket", () => {
   test("Update item quantity from user's basket", () => {
+    const itemToPatch = { product_id: 1, quantity: 1 };
     return request(app)
       .patch("/api/users/1/basket")
-      .expect(200)
+      .send(itemToPatch)
+      .expect(201)
       .then(({ body }) => {
-        console.log(body.basket);
+        console.log(body);
       });
   });
 });

@@ -54,6 +54,17 @@ exports.addToBasket = (product_id, quantity, user_id) => {
     });
 };
 
+exports.changeBasket = (product_id, quantity, user_id) => {
+  return db
+    .query(
+      `UPDATE baskets SET quantity = quantity + $1 WHERE product_id = $2 AND user_id = $3`,
+      [quantity, product_id, user_id]
+    )
+    .then(({ rows }) => {
+      return rows;
+    });
+};
+
 exports.removeItemFromBasket = (id) => {
   return db
     .query(`DELETE FROM baskets WHERE product_id = $1 RETURNING *;`, [id])
