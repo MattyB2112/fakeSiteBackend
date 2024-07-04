@@ -39,8 +39,8 @@ exports.deleteItemFromBasket = (req, res, next) => {
   const { product_id } = req.body;
   const { user_id } = req.params;
   removeItemFromBasket(product_id, user_id)
-    .then((comment) => {
-      res.sendStatus(200).send({ comment });
+    .then((result) => {
+      res.sendStatus(200).send(product_id);
     })
     .catch(next);
 };

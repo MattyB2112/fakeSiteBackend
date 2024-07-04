@@ -23,6 +23,7 @@ describe("/api/products", () => {
       });
   });
 });
+
 describe("/api/products/:product_id", () => {
   test("returns a status 200 and relevant product info", () => {
     return request(app)
@@ -96,7 +97,7 @@ describe("PATCH /api/users/:user_id/basket", () => {
 
 describe("DELETE /api/users/:user_id/basket", () => {
   test("Delete item entirely from user's basket", () => {
-    const itemToDelete = { product_id: 2, user_id: 1 };
+    const itemToDelete = { product_id: 2 };
     return request(app)
       .delete("/api/users/1/basket")
       .send(itemToDelete)

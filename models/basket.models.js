@@ -73,7 +73,6 @@ exports.removeItemFromBasket = (product_id, user_id) => {
       [product_id, user_id]
     )
     .then(({ rows }) => {
-      console.log(rows);
       if (rows.length === 0) {
         return Promise.reject({ status: 404, message: "HOYA" });
       }
