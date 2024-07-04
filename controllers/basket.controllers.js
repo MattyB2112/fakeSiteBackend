@@ -28,7 +28,6 @@ exports.postToBasket = (req, res, next) => {
 exports.patchBasket = (req, res, next) => {
   const { product_id, quantity } = req.body;
   const { user_id } = req.params;
-  console.log(product_id, quantity, user_id, "CONTROLLER");
   changeBasket(product_id, quantity, user_id)
     .then((result) => {
       console.log(result);
