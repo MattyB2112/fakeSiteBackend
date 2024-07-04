@@ -66,12 +66,16 @@ exports.changeBasket = (product_id, quantity, user_id) => {
     });
 };
 
-exports.removeItemFromBasket = (id) => {
+exports.removeItemFromBasket = (product_id, user_id) => {
   return db
-    .query(`DELETE FROM baskets WHERE product_id = $1 RETURNING *;`, [id])
+    .query(
+      `DELETE FROM baskets WHERE product_id = $1 AND user_id = $2 RETURNING *;`,
+      [product_id, user_id]
+    )
     .then(({ rows }) => {
+      console.log(rows);
       if (rows.length === 0) {
-        return Promise.reject({ status: 404, message: "not found" });
+        return Promise.reject({ status: 404, message: "HOYA" });
       }
       return rows[0];
     });

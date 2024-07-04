@@ -30,15 +30,15 @@ exports.patchBasket = (req, res, next) => {
   const { user_id } = req.params;
   changeBasket(product_id, quantity, user_id)
     .then((result) => {
-      console.log(result);
       res.sendStatus(201).send(product_id);
     })
     .catch(next);
 };
 
 exports.deleteItemFromBasket = (req, res, next) => {
-  const { product_id } = req.params;
-  removeItemFromBasket(product_id)
+  const { product_id } = req.body;
+  const { user_id } = req.params;
+  removeItemFromBasket(product_id, user_id)
     .then((comment) => {
       res.sendStatus(200).send({ comment });
     })
