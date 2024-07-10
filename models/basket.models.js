@@ -2,11 +2,15 @@ const db = require("../db/connection.js");
 
 exports.fetchBasket = (id) => {
   return db
-    .query(`SELECT * FROM baskets WHERE user_id = $1 ORDER BY product_id`, [id])
+    .query(
+      `SELECT baskets.*, products.productname, products.productprice, products.productimage1 FROM baskets INNER JOIN products ON baskets.product_id = products.product_id WHERE baskets.user_id = $1 ORDER BY baskets.product_id`,
+      [id]
+    )
     .then(({ rows }) => {
       if (rows.length === 0) {
         return Promise.reject({ status: 404, message: "no items in basket" });
       }
+      console.log(rows);
       return rows;
     });
 };
