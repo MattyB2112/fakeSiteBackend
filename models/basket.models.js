@@ -8,7 +8,7 @@ exports.fetchBasket = (id) => {
     )
     .then(({ rows }) => {
       if (rows.length === 0) {
-        return Promise.reject({ status: 404, message: "no items in basket" });
+        return 0;
       }
       console.log(rows);
       return rows;
