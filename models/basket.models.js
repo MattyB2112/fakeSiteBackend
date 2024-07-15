@@ -80,6 +80,6 @@ exports.removeItemFromBasket = (product_id, user_id) => {
       if (rows.length === 0) {
         return Promise.reject({ status: 404, message: "HOYA" });
       }
-      return rows[0];
+      return product_id;
     });
 };
