@@ -3,8 +3,22 @@ module.exports = [
     userFirstName: "Matt",
     userLastName: "Barker",
     userEmail: "mattbarker23@hotmail.com",
+    userPassword: "tester",
     userImage:
-      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/pwyyr3flqymevd6qvcfr/air-max-plus-shoes-zdrJWg.png",
+      "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
+    userAddress1: "123 Fake Street",
+    userAddress2: "Arizona",
+    userAddress3: "USA",
+    userPostcode: "MUR IC4",
+    userSince: Date.now(),
+  },
+  {
+    userFirstName: "Anny",
+    userLastName: "Parnell",
+    userEmail: "anny@parnell.com",
+    userPassword: "angela",
+    userImage:
+      "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
     userAddress1: "123 Fake Street",
     userAddress2: "Arizona",
     userAddress3: "USA",

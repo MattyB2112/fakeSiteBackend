@@ -4,7 +4,11 @@ const {
   getProducts,
   getProductById,
 } = require("./controllers/products.controllers.js");
-const { getUserById } = require("./controllers/users.controllers.js");
+const {
+  getUserById,
+  createUser,
+  getUserByEmail,
+} = require("./controllers/users.controllers.js");
 const {
   getBasket,
   postToBasket,
@@ -26,9 +30,13 @@ app.get("/api/products/:product_id", getProductById);
 
 app.get("/api/users/:user_id", getUserById);
 
+app.get("/api/users/", getUserByEmail);
+
 app.get("/api/users/:user_id/basket", getBasket);
 
 app.post("/api/users/:user_id/basket", postToBasket);
+
+app.post("/api/users", createUser);
 
 app.delete("/api/users/:user_id/basket", deleteItemFromBasket);
 

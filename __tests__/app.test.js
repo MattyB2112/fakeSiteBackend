@@ -47,7 +47,20 @@ describe("/api/:user_id", () => {
   });
 });
 
-describe.only("/api/users/:user_id/basket", () => {
+describe("/api/:useremail", () => {
+  test("returns user info via email search", () => {
+    const emailObj = { email: "matt@matt.com" };
+    return request(app)
+      .get("/api/users")
+      .send(emailObj)
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.user);
+      });
+  });
+});
+
+describe("/api/users/:user_id/basket", () => {
   test("returns a status 200 and user basket", () => {
     return request(app)
       .get("/api/users/1/basket")
@@ -91,6 +104,24 @@ describe("DELETE /api/users/:user_id/basket", () => {
       .delete("/api/users/1/basket")
       .send(itemToDelete)
       .expect(200)
+      .then(({ body }) => {
+        console.log(body);
+      });
+  });
+});
+
+describe("POST /api/users", () => {
+  test("Create new user", () => {
+    const newUserObj = {
+      firstName: "Testy",
+      surname: "McTesterson",
+      email: "matt@matt.com",
+      password: "tester",
+    };
+    return request(app)
+      .post("/api/users")
+      .send(newUserObj)
+      .expect(201)
       .then(({ body }) => {
         console.log(body);
       });

@@ -32,11 +32,12 @@ const seed = ({ productData, usersData, basketsData }) => {
           userFirstName VARCHAR,
           userLastName VARCHAR,
           userEmail VARCHAR,
+          userPassword VARCHAR,
           userImage VARCHAR DEFAULT 'https://images.pexels.com/photos/97050/pexels-photo-97050.jpeg?w=700&h=700',
-          userAddress1 VARCHAR,
-          userAddress2 VARCHAR,
-          userAddress3 VARCHAR,
-          userPostcode VARCHAR,
+          userAddress1 VARCHAR DEFAULT 'not added',
+          userAddress2 VARCHAR DEFAULT 'not added',
+          userAddress3 VARCHAR DEFAULT 'not added',
+          userPostcode VARCHAR DEFAULT 'not added',
           userSince TIMESTAMP
         );`);
 
@@ -83,12 +84,13 @@ const seed = ({ productData, usersData, basketsData }) => {
       const formattedUsersData = usersData.map(convertTimestampToDate);
 
       const insertUsersQueryStr = format(
-        "INSERT INTO users (userFirstName, userLastName, userEmail, userImage, userAddress1, userAddress2, userAddress3, userPostcode, userSince) VALUES %L;",
+        "INSERT INTO users (userFirstName, userLastName, userEmail, userPassword, userImage, userAddress1, userAddress2, userAddress3, userPostcode, userSince) VALUES %L;",
         formattedUsersData.map(
           ({
             userFirstName,
             userLastName,
             userEmail,
+            userPassword,
             userImage,
             userAddress1,
             userAddress2,
@@ -99,6 +101,7 @@ const seed = ({ productData, usersData, basketsData }) => {
             userFirstName,
             userLastName,
             userEmail,
+            userPassword,
             userImage,
             userAddress1,
             userAddress2,
