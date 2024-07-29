@@ -13,12 +13,13 @@ exports.fetchUserById = (id) => {
 
 exports.fetchUserByEmail = (email) => {
   return db
-    .query(`SELECT * FROM users WHERE userEMail = $1`, [email])
+    .query(`SELECT * FROM users WHERE userEmail = $1`, [email])
     .then(({ rows }) => {
       if (rows.length === 0) {
         return Promise.reject({ status: 404, message: "not found" });
       }
-      return rows;
+      console.log(rows);
+      return rows[0];
     });
 };
 

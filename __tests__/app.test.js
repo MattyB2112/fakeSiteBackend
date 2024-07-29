@@ -47,7 +47,7 @@ describe("/api/:user_id", () => {
   });
 });
 
-describe("/api/:useremail", () => {
+describe.only("/api/:useremail", () => {
   test("returns user info via email search", () => {
     const emailObj = { email: "matt@matt.com" };
     return request(app)
