@@ -15,7 +15,6 @@ exports.getUserById = (req, res) => {
 };
 
 exports.getUsers = (req, res) => {
-  const id = req.params.user_id;
   fetchUsers().then((user) => {
     res.status(200).send({ user: user });
   });
