@@ -11,6 +11,15 @@ exports.fetchUserById = (id) => {
     });
 };
 
+exports.fetchUsers = () => {
+  return db.query(`SELECT * FROM users`).then(({ rows }) => {
+    if (rows.length === 0) {
+      return Promise.reject({ status: 404, message: "not found" });
+    }
+    return rows;
+  });
+};
+
 exports.fetchUserByEmail = (email) => {
   return db
     .query(`SELECT * FROM users WHERE userEmail = $1`, [email])
@@ -18,7 +27,6 @@ exports.fetchUserByEmail = (email) => {
       if (rows.length === 0) {
         return Promise.reject({ status: 404, message: "not found" });
       }
-      console.log(rows);
       return rows[0];
     });
 };

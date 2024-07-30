@@ -4,11 +4,19 @@ const {
   fetchUserById,
   createNewUser,
   fetchUserByEmail,
+  fetchUsers,
 } = require("../models/users.models.js");
 
 exports.getUserById = (req, res) => {
   const id = req.params.user_id;
   fetchUserById(id).then((user) => {
+    res.status(200).send({ user: user });
+  });
+};
+
+exports.getUsers = (req, res) => {
+  const id = req.params.user_id;
+  fetchUsers().then((user) => {
     res.status(200).send({ user: user });
   });
 };

@@ -6,6 +6,7 @@ const {
 } = require("./controllers/products.controllers.js");
 const {
   getUserById,
+  getUsers,
   createUser,
   getUserByEmail,
 } = require("./controllers/users.controllers.js");
@@ -27,6 +28,8 @@ app.get("/", (req, res) => res.send("Hello World!"));
 app.get("/api/products", getProducts);
 
 app.get("/api/products/:product_id", getProductById);
+
+app.get("/api/users/", getUsers);
 
 app.get("/api/users/:user_id", getUserById);
 
