@@ -36,7 +36,18 @@ describe("/api/products/:product_id", () => {
 });
 
 //USERS
-describe("/api/:user_id", () => {
+describe.only("/api/users/", () => {
+  test("returns a status 200 and all users info", () => {
+    return request(app)
+      .get("/api/users/")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body);
+      });
+  });
+});
+
+describe("/api/users/:user_id", () => {
   test("returns a status 200 and relevant user info", () => {
     return request(app)
       .get("/api/users/1")
@@ -47,7 +58,7 @@ describe("/api/:user_id", () => {
   });
 });
 
-describe.only("/api/:useremail", () => {
+describe("/api/:useremail", () => {
   test("returns user info via email search", () => {
     const emailObj = { email: "matt@matt.com" };
     return request(app)
