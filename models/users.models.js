@@ -34,7 +34,7 @@ exports.fetchUserByEmail = (email) => {
 exports.createNewUser = (firstName, surname, email, password) => {
   return db
     .query(
-      "INSERT INTO users (userFirstName, userLastName, userEmail, userPassword) VALUES ($1, $2, $3, $4) RETURNING *;",
+      "INSERT INTO users (userfirstName, userlastName, useremail, userpassword) VALUES ($1, $2, $3, $4) RETURNING *;",
       [firstName, surname, email, password]
     )
     .then(({ rows }) => {
