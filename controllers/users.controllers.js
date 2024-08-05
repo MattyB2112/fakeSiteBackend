@@ -6,6 +6,7 @@ const {
   fetchUserByEmail,
   fetchUsers,
 } = require("../models/users.models.js");
+const { convertTimestampToDate } = require("../db/seeds/utils.js");
 
 exports.getUserById = (req, res) => {
   const id = req.params.user_id;
@@ -28,8 +29,24 @@ exports.getUserByEmail = (req, res) => {
 };
 
 exports.createUser = (req, res) => {
+  const timestamp = Date.now();
   const { firstName, surname, email, password } = req.body;
-  createNewUser(firstName, surname, email, password).then((result) => {
+  const newUser = {
+    firstName: firstName,
+    surname: surname,
+    email: email,
+    password: password,
+    userSince: new Date(timestamp),
+  };
+  const formattedUserData = convertTimestampToDate(newUser);
+  console.log(formattedUserData);
+  createNewUser(
+    formattedUserData.firstName,
+    formattedUserData.surname,
+    formattedUserData.email,
+    formattedUserData.password,
+    formattedUserData.userSince
+  ).then((result) => {
     res.status(201).send({ user: result });
   });
 };

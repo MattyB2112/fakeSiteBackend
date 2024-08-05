@@ -1,4 +1,5 @@
 const db = require("../db/connection.js");
+const { convertTimestampToDate } = require("../db/seeds/utils.js");
 
 exports.fetchUserById = (id) => {
   return db
@@ -31,11 +32,11 @@ exports.fetchUserByEmail = (email) => {
     });
 };
 
-exports.createNewUser = (firstName, surname, email, password) => {
+exports.createNewUser = (firstName, surname, email, password, userSince) => {
   return db
     .query(
-      "INSERT INTO users (userfirstName, userlastName, useremail, userpassword) VALUES ($1, $2, $3, $4) RETURNING *;",
-      [firstName, surname, email, password]
+      "INSERT INTO users (userfirstName, userlastName, useremail, userpassword, usersince) VALUES ($1, $2, $3, $4, $5) RETURNING *;",
+      [firstName, surname, email, password, userSince]
     )
     .then(({ rows }) => {
       return rows[0];
