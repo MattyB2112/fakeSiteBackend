@@ -50,20 +50,18 @@ describe("/api/users/", () => {
 describe("/api/users/:user_id", () => {
   test("returns a status 200 and relevant user info", () => {
     return request(app)
-      .get("/api/users/1")
+      .get("/api/users/id/1")
       .expect(200)
       .then(({ body }) => {
-        console.log("WORKS");
+        console.log(body);
       });
   });
 });
 
-describe("/api/users", () => {
+describe.only("/api/users/:email", () => {
   test("returns user info via email search", () => {
-    const emailObj = { email: "matt@matt.com" };
     return request(app)
-      .get("/api/users")
-      .send(emailObj)
+      .get("/api/users/email/anny@parnell.com")
       .expect(200)
       .then(({ body }) => {
         console.log(body.user);
@@ -121,7 +119,7 @@ describe("DELETE /api/users/:user_id/basket", () => {
   });
 });
 
-describe.only("POST /api/users", () => {
+describe("POST /api/users", () => {
   test("Create new user", () => {
     const newUserObj = {
       firstName: "Testy",

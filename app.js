@@ -31,9 +31,9 @@ app.get("/api/products/:product_id", getProductById);
 
 app.get("/api/users/", getUsers);
 
-app.get("/api/users/:user_id", getUserById);
+app.get("/api/users/id/:user_id", getUserById);
 
-app.get("/api/users/", getUserByEmail);
+app.get("/api/users/email/:email", getUserByEmail);
 
 app.get("/api/users/:user_id/basket", getBasket);
 
