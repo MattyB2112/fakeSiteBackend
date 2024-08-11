@@ -8,11 +8,13 @@ const {
 } = require("../models/users.models.js");
 const { convertTimestampToDate } = require("../db/seeds/utils.js");
 
-exports.getUserById = (req, res) => {
+exports.getUserById = (req, res, next) => {
   const id = req.params.user_id;
-  fetchUserById(id).then((user) => {
-    res.status(200).send({ user: user });
-  });
+  fetchUserById(id)
+    .then((user) => {
+      res.status(200).send({ user: user });
+    })
+    .catch(next);
 };
 
 exports.getUsers = (req, res) => {
@@ -21,12 +23,13 @@ exports.getUsers = (req, res) => {
   });
 };
 
-exports.getUserByEmail = (req, res) => {
+exports.getUserByEmail = (req, res, next) => {
   const email = req.params.email;
-  console.log(email);
-  fetchUserByEmail(email).then((user) => {
-    res.status(200).send({ user });
-  });
+  fetchUserByEmail(email)
+    .then((user) => {
+      res.status(200).send({ user });
+    })
+    .catch(next);
 };
 
 exports.createUser = (req, res) => {

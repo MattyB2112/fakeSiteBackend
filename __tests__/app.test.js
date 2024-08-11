@@ -47,7 +47,7 @@ describe("/api/users/", () => {
   });
 });
 
-describe("/api/users/:user_id", () => {
+describe("/api/users//id/:user_id", () => {
   test("returns a status 200 and relevant user info", () => {
     return request(app)
       .get("/api/users/id/1")
@@ -58,13 +58,35 @@ describe("/api/users/:user_id", () => {
   });
 });
 
-describe.only("/api/users/:email", () => {
+describe.only("/api/users//id/:user_id", () => {
+  test("returns an error if user id not found", () => {
+    return request(app)
+      .get("/api/users/id/0")
+      .expect(404)
+      .then(({ body }) => {
+        console.log(body);
+      });
+  });
+});
+
+describe("/api/users//email/:email", () => {
   test("returns user info via email search", () => {
     return request(app)
       .get("/api/users/email/anny@parnell.com")
       .expect(200)
       .then(({ body }) => {
         console.log(body.user);
+      });
+  });
+});
+
+describe("/api/users/email/:email", () => {
+  test("returns error if email not found", () => {
+    return request(app)
+      .get("/api/users/email/invalid@test.com")
+      .expect(404)
+      .then(({ body }) => {
+        console.log(body);
       });
   });
 });

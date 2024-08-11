@@ -6,7 +6,7 @@ exports.fetchUserById = (id) => {
     .query(`SELECT * FROM users WHERE user_id = $1`, [id])
     .then(({ rows }) => {
       if (rows.length === 0) {
-        return Promise.reject({ status: 404, message: "not found" });
+        return Promise.reject({ status: 404, message: "id not found" });
       }
       return rows;
     });
@@ -26,7 +26,7 @@ exports.fetchUserByEmail = (email) => {
     .query(`SELECT * FROM users WHERE userEmail = $1`, [email])
     .then(({ rows }) => {
       if (rows.length === 0) {
-        return Promise.reject({ status: 404, message: "not found" });
+        return Promise.reject({ status: 404, message: "email not found" });
       }
       return rows[0];
     });
