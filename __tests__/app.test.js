@@ -102,7 +102,7 @@ describe("GET /api/users/id/:user_id/basket", () => {
   });
 });
 
-describe.only("POST /api/users/id/user_id/basket", () => {
+describe("POST /api/users/id/user_id/basket", () => {
   test("adds item to basket", () => {
     const itemToAdd = { product_id: 2, quantity: 1 };
     return request(app)
@@ -128,7 +128,7 @@ describe("PATCH /api/users/id/user_id/basket", () => {
   });
 });
 
-describe.only("DELETE /api/users/id/user_id/basket", () => {
+describe("DELETE /api/users/id/user_id/basket", () => {
   test("Delete item entirely from user's basket", () => {
     const itemToDelete = { product_id: 2 };
     return request(app)

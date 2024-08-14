@@ -41,9 +41,9 @@ app.post("/api/users/id/:user_id/basket", postToBasket);
 
 app.post("/api/users", createUser);
 
-app.delete("/api/users/id/user_id/basket", deleteItemFromBasket);
+app.delete("/api/users/id/:user_id/basket", deleteItemFromBasket);
 
-app.patch("/api/users/id/user_id/basket", patchBasket);
+app.patch("/api/users/id/:user_id/basket", patchBasket);
 
 app.use((err, req, res, next) => {
   if (err.status && err.message) {
