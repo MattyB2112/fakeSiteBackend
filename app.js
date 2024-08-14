@@ -35,15 +35,15 @@ app.get("/api/users/id/:user_id", getUserById);
 
 app.get("/api/users/email/:email", getUserByEmail);
 
-app.get("/api/users/:user_id/basket", getBasket);
+app.get("/api/users/id/:user_id/basket", getBasket);
 
-app.post("/api/users/:user_id/basket", postToBasket);
+app.post("/api/users/id/:user_id/basket", postToBasket);
 
 app.post("/api/users", createUser);
 
-app.delete("/api/users/:user_id/basket", deleteItemFromBasket);
+app.delete("/api/users/id/user_id/basket", deleteItemFromBasket);
 
-app.patch("/api/users/:user_id/basket", patchBasket);
+app.patch("/api/users/id/user_id/basket", patchBasket);
 
 app.use((err, req, res, next) => {
   if (err.status && err.message) {

@@ -47,7 +47,7 @@ describe("/api/users/", () => {
   });
 });
 
-describe("/api/users//id/:user_id", () => {
+describe("/api/users/id/:user_id", () => {
   test("returns a status 200 and relevant user info", () => {
     return request(app)
       .get("/api/users/id/1")
@@ -58,7 +58,7 @@ describe("/api/users//id/:user_id", () => {
   });
 });
 
-describe.only("/api/users//id/:user_id", () => {
+describe("/api/users/id/:user_id", () => {
   test("returns an error if user id not found", () => {
     return request(app)
       .get("/api/users/id/0")
@@ -69,10 +69,10 @@ describe.only("/api/users//id/:user_id", () => {
   });
 });
 
-describe("/api/users//email/:email", () => {
+describe("/api/users/email/:email", () => {
   test("returns user info via email search", () => {
     return request(app)
-      .get("/api/users/email/anny@parnell.com")
+      .get("/api/users/email/anny@parsnip.com")
       .expect(200)
       .then(({ body }) => {
         console.log(body.user);
@@ -91,10 +91,10 @@ describe("/api/users/email/:email", () => {
   });
 });
 
-describe("/api/users/:user_id/basket", () => {
+describe("GET /api/users/id/:user_id/basket", () => {
   test("returns a status 200 and user basket", () => {
     return request(app)
-      .get("/api/users/1/basket")
+      .get("/api/users/id/1/basket")
       .expect(200)
       .then(({ body }) => {
         console.log(body.basket);
@@ -102,11 +102,11 @@ describe("/api/users/:user_id/basket", () => {
   });
 });
 
-describe("/api/users/:user_id/basket", () => {
+describe.only("POST /api/users/id/user_id/basket", () => {
   test("adds item to basket", () => {
     const itemToAdd = { product_id: 2, quantity: 1 };
     return request(app)
-      .post("/api/users/1/basket")
+      .post("/api/users/id/1/basket")
       .send(itemToAdd)
       .expect(201)
       .then(({ body }) => {
@@ -115,11 +115,11 @@ describe("/api/users/:user_id/basket", () => {
   });
 });
 
-describe("PATCH /api/users/:user_id/basket", () => {
+describe("PATCH /api/users/id/user_id/basket", () => {
   test("Update item quantity from user's basket", () => {
     const itemToPatch = { product_id: 1, quantity: 1 };
     return request(app)
-      .patch("/api/users/1/basket")
+      .patch("/api/users/id/user_id/basket")
       .send(itemToPatch)
       .expect(201)
       .then(({ body }) => {
@@ -128,11 +128,11 @@ describe("PATCH /api/users/:user_id/basket", () => {
   });
 });
 
-describe("DELETE /api/users/:user_id/basket", () => {
+describe.only("DELETE /api/users/id/user_id/basket", () => {
   test("Delete item entirely from user's basket", () => {
     const itemToDelete = { product_id: 2 };
     return request(app)
-      .delete("/api/users/1/basket")
+      .delete("/api/users/id/1/basket")
       .send(itemToDelete)
       .expect(200)
       .then(({ body }) => {
