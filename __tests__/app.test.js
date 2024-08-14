@@ -119,7 +119,7 @@ describe("PATCH /api/users/id/user_id/basket", () => {
   test("Update item quantity from user's basket", () => {
     const itemToPatch = { product_id: 1, quantity: 1 };
     return request(app)
-      .patch("/api/users/id/user_id/basket")
+      .patch("/api/users/id/1/basket")
       .send(itemToPatch)
       .expect(201)
       .then(({ body }) => {
