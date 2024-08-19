@@ -35,4 +35,40 @@ module.exports = [
     about:
       "Slick by name, slick by nature. Who is Rick, you say? We don't know, and we don't want to know.",
   },
+  {
+    productName: "Red Beasts",
+    productType: "footwear",
+    productCategory: "men",
+    productPrice: 119.99,
+    productImage1: "https://i.imgur.com/3kRb9bG.jpeg",
+    productImage2: "https://i.imgur.com/DxGGGGw.jpeg",
+    productImage3: "https://i.imgur.com/vmDBWQ3.jpeg",
+    productImage4: "https://i.imgur.com/sYwAU9W.jpeg",
+    about:
+      "Keep your feet cool but your look hot. With these on your feet, you'll be melting the pavement.",
+  },
+  {
+    productName: "Digital Natives",
+    productType: "footwear",
+    productCategory: "men",
+    productPrice: 89.99,
+    productImage1: "https://i.imgur.com/EP8TsHN.jpeg",
+    productImage2: "https://i.imgur.com/NiyeSJM.jpeg",
+    productImage3: "https://i.imgur.com/OARZs8x.jpeg",
+    productImage4: "https://i.imgur.com/3adfA7P.jpeg",
+    about:
+      "Stay ahead of the curve with these newest, freshest footwear, exclusive to Fakery Clothing.",
+  },
+  {
+    productName: "Ocean Hoppers",
+    productType: "footwear",
+    productCategory: "men",
+    productPrice: 49.99,
+    productImage1: "https://i.imgur.com/Ois9R7D.jpeg",
+    productImage2: "https://i.imgur.com/40JnqDI.jpeg",
+    productImage3: "https://i.imgur.com/T6JEB1v.jpeg",
+    productImage4: "https://i.imgur.com/k2nl0G2.jpeg",
+    about:
+      "For the bold, for the daring, for the absolute-under-no-circumstances-will-confirm. These are for you",
+  },
 ];
