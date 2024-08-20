@@ -1,9 +1,11 @@
 const db = require("../db/connection.js");
 
-exports.fetchProducts = () => {
-  return db.query("SELECT * FROM products").then(({ rows }) => {
-    return rows;
-  });
+exports.fetchProducts = (sort_by = "dateadded", order = "ASC") => {
+  return db
+    .query(`SELECT * FROM products ORDER BY ${sort_by} ${order}`)
+    .then(({ rows }) => {
+      return rows;
+    });
 };
 
 exports.fetchProductById = (id) => {

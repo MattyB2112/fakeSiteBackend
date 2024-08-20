@@ -10,6 +10,7 @@ module.exports = [
     productImage4: "https://i.imgur.com/dKNhUEU.jpeg",
     about:
       "Named after the incredibly handy tool, Axios, these bad boys will make you run 100 metres in 6 seconds. Sit down, Usain Bolt.",
+    dateAdded: Date.now(),
   },
   {
     productName: "React 2.0s",
@@ -22,6 +23,7 @@ module.exports = [
     productImage4: "https://i.imgur.com/TZsT2ih.jpeg",
     about:
       "Reaction times slipping? Get on your grind with the new and improved React 2.0. Once they're on, you'll never want to take them off.",
+    dateAdded: Date.now(),
   },
   {
     productName: "Slick Ricks",
@@ -34,6 +36,7 @@ module.exports = [
     productImage4: "https://i.imgur.com/Wo8tlOI.jpeg",
     about:
       "Slick by name, slick by nature. Who is Rick, you say? We don't know, and we don't want to know.",
+    dateAdded: Date.now(),
   },
   {
     productName: "Red Beasts",
@@ -45,12 +48,13 @@ module.exports = [
     productImage3: "https://i.imgur.com/vmDBWQ3.jpeg",
     productImage4: "https://i.imgur.com/sYwAU9W.jpeg",
     about:
-      "Keep your feet cool but your look hot. With these on your feet, you'll be melting the pavement.",
+      "Keep your feet cool but your look hot. With these bad boys, you'll be melting the pavement.",
+    dateAdded: Date.now(),
   },
   {
     productName: "Digital Natives",
     productType: "footwear",
-    productCategory: "men",
+    productCategory: "women",
     productPrice: 89.99,
     productImage1: "https://i.imgur.com/EP8TsHN.jpeg",
     productImage2: "https://i.imgur.com/NiyeSJM.jpeg",
@@ -58,17 +62,19 @@ module.exports = [
     productImage4: "https://i.imgur.com/3adfA7P.jpeg",
     about:
       "Stay ahead of the curve with these newest, freshest footwear, exclusive to Fakery Clothing.",
+    dateAdded: Date.now(),
   },
   {
     productName: "Ocean Hoppers",
     productType: "footwear",
-    productCategory: "men",
+    productCategory: "kids",
     productPrice: 49.99,
     productImage1: "https://i.imgur.com/Ois9R7D.jpeg",
     productImage2: "https://i.imgur.com/40JnqDI.jpeg",
     productImage3: "https://i.imgur.com/T6JEB1v.jpeg",
     productImage4: "https://i.imgur.com/k2nl0G2.jpeg",
     about:
-      "For the bold, for the daring, for the absolute-under-no-circumstances-will-confirm. These are for you",
+      "For the bold, for the daring, for the absolutely-under-no-circumstances-will-confirm. These are for you.",
+    dateAdded: Date.now(),
   },
 ];

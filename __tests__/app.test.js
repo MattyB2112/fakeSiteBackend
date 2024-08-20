@@ -13,13 +13,13 @@ afterAll(() => {
 //   return seed(data);
 // });
 
-describe("/api/products", () => {
+describe.only("/api/products", () => {
   test("returns a status 200 and all product info", () => {
     return request(app)
       .get("/api/products")
       .expect(200)
       .then(({ body }) => {
-        console.log("WORKS");
+        console.log(body);
       });
   });
 });

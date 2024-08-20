@@ -1,6 +1,9 @@
 const format = require("pg-format");
 const db = require("../connection");
-const { convertTimestampToDate } = require("./utils");
+const {
+  convertTimestampToDateUsers,
+  convertTimestampToDateProducts,
+} = require("./utils");
 
 const seed = ({ productData, usersData, basketsData }) => {
   return db
@@ -23,7 +26,8 @@ const seed = ({ productData, usersData, basketsData }) => {
           productImage2 VARCHAR,
           productImage3 VARCHAR,
           productImage4 VARCHAR,
-          about VARCHAR
+          about VARCHAR,
+          dateAdded TIMESTAMP
         );`);
 
       const usersTablePromise = db.query(`
@@ -53,9 +57,13 @@ const seed = ({ productData, usersData, basketsData }) => {
     })
 
     .then(() => {
+      const formattedProductData = productData.map(
+        convertTimestampToDateProducts
+      );
+
       const insertProductsQueryStr = format(
-        "INSERT INTO products (productName, productType, productCategory, productPrice, productImage1, productImage2, productImage3, productImage4, about) VALUES %L;",
-        productData.map(
+        "INSERT INTO products (productName, productType, productCategory, productPrice, productImage1, productImage2, productImage3, productImage4, about, dateAdded) VALUES %L;",
+        formattedProductData.map(
           ({
             productName,
             productType,
@@ -66,6 +74,7 @@ const seed = ({ productData, usersData, basketsData }) => {
             productImage3,
             productImage4,
             about,
+            dateAdded,
           }) => [
             productName,
             productType,
@@ -76,12 +85,13 @@ const seed = ({ productData, usersData, basketsData }) => {
             productImage3,
             productImage4,
             about,
+            dateAdded,
           ]
         )
       );
       const productsPromise = db.query(insertProductsQueryStr);
 
-      const formattedUsersData = usersData.map(convertTimestampToDate);
+      const formattedUsersData = usersData.map(convertTimestampToDateUsers);
 
       const insertUsersQueryStr = format(
         "INSERT INTO users (userFirstName, userLastName, userEmail, userPassword, userImage, userAddress1, userAddress2, userAddress3, userPostcode, userSince) VALUES %L;",
