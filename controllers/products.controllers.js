@@ -4,7 +4,8 @@ const {
 } = require("../models/products.models.js");
 
 exports.getProducts = (req, res, next) => {
-  fetchProducts()
+  const { sort_by, order_by } = req.query;
+  fetchProducts(sort_by, order_by)
     .then((products) => {
       res.status(200).send({ products });
     })
