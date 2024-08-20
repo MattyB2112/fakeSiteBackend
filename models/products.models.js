@@ -1,6 +1,6 @@
 const db = require("../db/connection.js");
 
-exports.fetchProducts = (sort_by = "dateadded", order = "ASC") => {
+exports.fetchProducts = (sort_by = "productprice", order = "ASC") => {
   return db
     .query(`SELECT * FROM products ORDER BY ${sort_by} ${order}`)
     .then(({ rows }) => {

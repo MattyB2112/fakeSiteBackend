@@ -21,7 +21,7 @@ const seed = ({ productData, usersData, basketsData }) => {
           productName VARCHAR,
           productType VARCHAR,
           productCategory VARCHAR,
-          productPrice NUMERIC,
+          productPrice DECIMAL(5,2),
           productImage1 VARCHAR,
           productImage2 VARCHAR,
           productImage3 VARCHAR,
