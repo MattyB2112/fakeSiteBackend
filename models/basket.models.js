@@ -16,7 +16,7 @@ exports.fetchBasket = (id) => {
 };
 
 exports.addToBasket = (product_id, quantity, user_id, size) => {
-  console.log(product_id, quantity, user_id, "MODEL");
+  console.log(product_id, quantity, user_id, size, "MODEL");
   return db
     .query(`SELECT * FROM users WHERE user_id = $1`, [user_id])
     .then(({ rows }) => {
@@ -49,8 +49,8 @@ exports.addToBasket = (product_id, quantity, user_id, size) => {
                       });
                   } else {
                     return db.query(
-                      `UPDATE baskets SET quantity = quantity + 1 WHERE product_id = $1 AND user_id = $2; `,
-                      [product_id, user_id]
+                      `UPDATE baskets SET quantity = quantity + 1 WHERE product_id = $1 AND user_id = $2 AND size = $3; `,
+                      [product_id, user_id, size]
                     );
                   }
                 });
