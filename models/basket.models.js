@@ -58,11 +58,11 @@ exports.addToBasket = (product_id, quantity, user_id, size) => {
     });
 };
 
-exports.changeBasket = (product_id, quantity, user_id) => {
+exports.changeBasket = (product_id, quantity, user_id, size) => {
   return db
     .query(
-      `UPDATE baskets SET quantity = quantity + $1 WHERE product_id = $2 AND user_id = $3`,
-      [quantity, product_id, user_id]
+      `UPDATE baskets SET quantity = quantity + $1 WHERE product_id = $2 AND user_id = $3 AND size = $4`,
+      [quantity, product_id, user_id, size]
     )
     .then(({ rows }) => {
       console.log(rows);
