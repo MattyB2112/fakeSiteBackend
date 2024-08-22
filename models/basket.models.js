@@ -70,11 +70,11 @@ exports.changeBasket = (product_id, quantity, user_id) => {
     });
 };
 
-exports.removeItemFromBasket = (product_id, user_id) => {
+exports.removeItemFromBasket = (product_id, user_id, size) => {
   return db
     .query(
-      `DELETE FROM baskets WHERE product_id = $1 AND user_id = $2 RETURNING *;`,
-      [product_id, user_id]
+      `DELETE FROM baskets WHERE product_id = $1 AND user_id = $2 AND size = $3 RETURNING *;`,
+      [product_id, user_id, size]
     )
     .then(({ rows }) => {
       // if (rows.length === 0) {

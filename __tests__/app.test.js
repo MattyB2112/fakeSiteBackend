@@ -130,7 +130,7 @@ describe("PATCH /api/users/id/user_id/basket", () => {
 
 describe("DELETE /api/users/id/user_id/basket", () => {
   test("Delete item entirely from user's basket", () => {
-    const itemToDelete = { product_id: 2 };
+    const itemToDelete = { product_id: 2, size: 5 };
     return request(app)
       .delete("/api/users/id/1/basket")
       .send(itemToDelete)
