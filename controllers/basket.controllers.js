@@ -36,9 +36,9 @@ exports.patchBasket = (req, res, next) => {
 };
 
 exports.deleteItemFromBasket = (req, res, next) => {
-  const { product_id } = req.body;
+  const { product_id, size } = req.body;
   const { user_id } = req.params;
-  removeItemFromBasket(product_id, user_id)
+  removeItemFromBasket(product_id, user_id, size)
     .then((result) => {
       res.sendStatus(200).send(product_id);
     })
