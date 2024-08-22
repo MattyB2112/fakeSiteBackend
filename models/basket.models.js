@@ -15,7 +15,7 @@ exports.fetchBasket = (id) => {
     });
 };
 
-exports.addToBasket = (product_id, quantity, user_id) => {
+exports.addToBasket = (product_id, quantity, user_id, size) => {
   console.log(product_id, quantity, user_id, "MODEL");
   return db
     .query(`SELECT * FROM users WHERE user_id = $1`, [user_id])
@@ -41,8 +41,8 @@ exports.addToBasket = (product_id, quantity, user_id) => {
                   if (rows.length === 0) {
                     return db
                       .query(
-                        "INSERT INTO baskets (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *;",
-                        [user_id, product_id, quantity]
+                        "INSERT INTO baskets (user_id, product_id, quantity, size) VALUES ($1, $2, $3, $4) RETURNING *;",
+                        [user_id, product_id, quantity, size]
                       )
                       .then(({ rows }) => {
                         return rows[0];

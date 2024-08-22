@@ -13,7 +13,7 @@ afterAll(() => {
 //   return seed(data);
 // });
 
-describe.only("/api/products", () => {
+describe("/api/products", () => {
   test("returns a status 200 and all product info", () => {
     return request(app)
       .get("/api/products")
@@ -102,9 +102,9 @@ describe("GET /api/users/id/:user_id/basket", () => {
   });
 });
 
-describe("POST /api/users/id/user_id/basket", () => {
+describe.only("POST /api/users/id/user_id/basket", () => {
   test("adds item to basket", () => {
-    const itemToAdd = { product_id: 2, quantity: 1 };
+    const itemToAdd = { product_id: 2, quantity: 1, size: 5 };
     return request(app)
       .post("/api/users/id/1/basket")
       .send(itemToAdd)
