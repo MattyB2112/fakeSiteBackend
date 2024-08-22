@@ -10,13 +10,12 @@ exports.fetchBasket = (id) => {
       if (rows.length === 0) {
         return 0;
       }
-      console.log(rows);
+
       return rows;
     });
 };
 
 exports.addToBasket = (product_id, quantity, user_id, size) => {
-  console.log(product_id, quantity, user_id, size, "MODEL");
   return db
     .query(`SELECT * FROM users WHERE user_id = $1`, [user_id])
     .then(({ rows }) => {
@@ -61,12 +60,15 @@ exports.addToBasket = (product_id, quantity, user_id, size) => {
 exports.changeBasket = (product_id, quantity, user_id, size) => {
   return db
     .query(
-      `UPDATE baskets SET quantity = quantity + $1 WHERE product_id = $2 AND user_id = $3 AND size = $4`,
+      `UPDATE baskets SET quantity = quantity + $1 WHERE product_id = $2 AND user_id = $3 AND size = $4 RETURNING *;`,
       [quantity, product_id, user_id, size]
     )
-    .then(({ rows }) => {
-      console.log(rows);
-      return rows;
+    .then(() => {
+      this.fetchBasket(user_id).then((result) => {
+        if (result[0].quantity === 0) {
+          this.removeItemFromBasket(product_id, user_id, size);
+        }
+      });
     });
 };
 

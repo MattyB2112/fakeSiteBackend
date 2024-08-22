@@ -104,18 +104,18 @@ describe("GET /api/users/id/:user_id/basket", () => {
 
 describe.only("POST /api/users/id/user_id/basket", () => {
   test("adds item to basket", () => {
-    const itemToAdd = { product_id: 2, quantity: 1, size: 5 };
+    const itemToAdd = { product_id: 1, quantity: 1, size: 5 };
     return request(app)
       .post("/api/users/id/1/basket")
       .send(itemToAdd)
       .expect(201)
       .then(({ body }) => {
-        console.log(body.product_id);
+        console.log(body);
       });
   });
 });
 
-describe("PATCH /api/users/id/user_id/basket", () => {
+describe.only("PATCH /api/users/id/user_id/basket", () => {
   test("Update item quantity from user's basket", () => {
     const itemToPatch = { product_id: 1, quantity: 1 };
     return request(app)
