@@ -65,9 +65,11 @@ exports.changeBasket = (product_id, quantity, user_id, size) => {
     )
     .then(() => {
       this.fetchBasket(user_id).then((result) => {
-        if (result[0].quantity === 0) {
-          this.removeItemFromBasket(product_id, user_id, size);
-        }
+        console.log(result);
+        for (let i = 0; i < result.length; i++)
+          if (result[i].quantity === 0) {
+            this.removeItemFromBasket(product_id, user_id, size);
+          }
       });
     });
 };
