@@ -34,8 +34,8 @@ exports.addToBasket = (product_id, quantity, user_id, size) => {
             } else
               return db
                 .query(
-                  `SELECT * FROM baskets WHERE product_id = $1 AND user_id = $2`,
-                  [product_id, user_id]
+                  `SELECT * FROM baskets WHERE product_id = $1 AND user_id = $2 AND size = $3`,
+                  [product_id, user_id, size]
                 )
                 .then(({ rows }) => {
                   if (rows.length === 0) {
