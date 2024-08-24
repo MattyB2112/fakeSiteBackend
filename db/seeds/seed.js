@@ -46,10 +46,10 @@ const seed = ({ productData, usersData, basketsData }) => {
           userEmail VARCHAR,
           userPassword VARCHAR,
           userImage VARCHAR DEFAULT 'https://images.pexels.com/photos/97050/pexels-photo-97050.jpeg?w=700&h=700',
-          userAddress1 VARCHAR DEFAULT 'not added',
-          userAddress2 VARCHAR DEFAULT 'not added',
-          userAddress3 VARCHAR DEFAULT 'not added',
-          userPostcode VARCHAR DEFAULT 'not added',
+          userAddress1 VARCHAR(50) DEFAULT 'not added',
+          userAddress2 VARCHAR(50) DEFAULT 'not added',
+          userAddress3 VARCHAR(50) DEFAULT 'not added',
+          userPostcode VARCHAR(50) DEFAULT 'not added',
           userSince TIMESTAMP
         );`);
 
@@ -149,19 +149,7 @@ const seed = ({ productData, usersData, basketsData }) => {
 
       const usersPromise = db.query(insertUsersQueryStr);
 
-      const insertBasketsQueryStr = format(
-        "INSERT INTO baskets (user_id, product_id, quantity, size) VALUES %L;",
-        basketsData.map(({ user_id, product_id, quantity, size }) => [
-          user_id,
-          product_id,
-          quantity,
-          size,
-        ])
-      );
-
-      const basketsPromise = db.query(insertBasketsQueryStr);
-
-      return Promise.all([productsPromise, usersPromise, basketsPromise]);
+      return Promise.all([productsPromise, usersPromise]);
     });
 };
 

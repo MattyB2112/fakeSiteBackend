@@ -13,6 +13,13 @@ module.exports = [
     userSince: Date.now(),
   },
   {
+    userFirstName: "Guest",
+    userLastName: "Account",
+    userEmail: "guest@guest.com",
+    userPassword: "guesttest",
+    userSince: Date.now(),
+  },
+  {
     userFirstName: "Anny",
     userLastName: "Parsnip",
     userEmail: "anny@parsnip.com",
@@ -23,6 +30,13 @@ module.exports = [
     userAddress2: "Arizona",
     userAddress3: "USA",
     userPostcode: "MUR IC4",
+    userSince: Date.now(),
+  },
+  {
+    userFirstName: "Beef",
+    userLastName: "Cow",
+    userEmail: "beef@cow.com",
+    userPassword: "beefcow",
     userSince: Date.now(),
   },
 ];

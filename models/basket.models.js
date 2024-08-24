@@ -3,7 +3,7 @@ const db = require("../db/connection.js");
 exports.fetchBasket = (id) => {
   return db
     .query(
-      `SELECT baskets.*, products.productname, products.productprice, products.productimage1 FROM baskets INNER JOIN products ON baskets.product_id = products.product_id WHERE baskets.user_id = $1 ORDER BY baskets.product_id`,
+      `SELECT baskets.*, products.productname, products.productprice, products.productimage1 FROM baskets INNER JOIN products ON baskets.product_id = products.product_id WHERE baskets.user_id = $1 ORDER BY baskets.size`,
       [id]
     )
     .then(({ rows }) => {

@@ -78,6 +78,7 @@ describe("GET /api/users/", () => {
       .get("/api/users/")
       .expect(200)
       .then(({ body }) => {
+        console.log(body.user);
         body.user.forEach((user) => {
           expect(user.hasOwnProperty("user_id")).toBe(true);
           expect(user.hasOwnProperty("userfirstname")).toBe(true);
@@ -144,6 +145,7 @@ describe("GET /api/users/email/:email", () => {
   });
 });
 
+//BASKETS
 describe("POST /api/users/id/user_id/basket", () => {
   test("adds item to basket", () => {
     const itemToAdd = { product_id: 1, quantity: 1, size: 5 };
