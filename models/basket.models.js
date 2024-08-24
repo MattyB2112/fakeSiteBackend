@@ -47,10 +47,14 @@ exports.addToBasket = (product_id, quantity, user_id, size) => {
                         return rows[0];
                       });
                   } else {
-                    return db.query(
-                      `UPDATE baskets SET quantity = quantity + 1 WHERE product_id = $1 AND user_id = $2 AND size = $3; `,
-                      [product_id, user_id, size]
-                    );
+                    return db
+                      .query(
+                        `UPDATE baskets SET quantity = quantity + 1 WHERE product_id = $1 AND user_id = $2 AND size = $3 RETURNING *; `,
+                        [product_id, user_id, size]
+                      )
+                      .then(({ rows }) => {
+                        return rows[0];
+                      });
                   }
                 });
           });
