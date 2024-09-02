@@ -78,7 +78,6 @@ describe("GET /api/users/", () => {
       .get("/api/users/")
       .expect(200)
       .then(({ body }) => {
-        console.log(body.user);
         body.user.forEach((user) => {
           expect(user.hasOwnProperty("user_id")).toBe(true);
           expect(user.hasOwnProperty("userfirstname")).toBe(true);
@@ -171,7 +170,6 @@ describe("GET /api/users/id/:user_id/basket", () => {
       .get("/api/users/id/1/basket")
       .expect(200)
       .then(({ body }) => {
-        console.log(body);
         body.basket.forEach((basketItem) => {
           expect(basketItem.hasOwnProperty("user_id"));
           expect(basketItem.hasOwnProperty("product_id"));
@@ -197,7 +195,6 @@ describe("PATCH /api/users/id/user_id/basket", () => {
           .get("/api/users/id/1/basket")
           .expect(200)
           .then(({ body }) => {
-            console.log(body);
             const updatedItem = body.basket[0];
             expect(updatedItem.quantity).toBe(2);
           });
@@ -236,7 +233,6 @@ describe("POST /api/users", () => {
       .send(newUserObj)
       .expect(201)
       .then(({ body }) => {
-        console.log(body);
         const newUser = body.newUser;
         expect(newUser.userfirstname).toBe("Testy");
         expect(newUser.userlastname).toBe("McTesterson");

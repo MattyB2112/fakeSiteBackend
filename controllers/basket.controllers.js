@@ -16,8 +16,9 @@ exports.getBasket = (req, res, next) => {
 
 exports.postToBasket = (req, res, next) => {
   const { product_id, quantity, size } = req.body;
+  const dateadded = new Date(Date.now());
   const { user_id } = req.params;
-  addToBasket(product_id, quantity, user_id, size)
+  addToBasket(product_id, quantity, user_id, size, dateadded)
     .then((result) => {
       res.sendStatus(201).send(product_id);
     })

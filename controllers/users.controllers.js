@@ -25,7 +25,6 @@ exports.getUsers = (req, res) => {
 
 exports.getUserByEmail = (req, res, next) => {
   const email = req.params.email;
-  console.log(email, "<--HERE");
   fetchUserByEmail(email)
     .then((user) => {
       res.status(200).send({ user });

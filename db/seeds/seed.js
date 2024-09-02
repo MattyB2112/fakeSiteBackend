@@ -61,7 +61,8 @@ const seed = ({ productData, usersData, basketsData }) => {
     user_id INT REFERENCES users(user_id),
     product_id INT REFERENCES products(product_id),
     quantity INT,
-    size INT
+    size INT,
+    date_added TIMESTAMP
   );`);
     })
 

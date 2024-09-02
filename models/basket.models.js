@@ -3,7 +3,7 @@ const db = require("../db/connection.js");
 exports.fetchBasket = (id) => {
   return db
     .query(
-      `SELECT baskets.*, products.productname, products.productprice, products.productimage1 FROM baskets INNER JOIN products ON baskets.product_id = products.product_id WHERE baskets.user_id = $1 ORDER BY baskets.size`,
+      `SELECT baskets.*, products.productname, products.productprice, products.productimage1 FROM baskets INNER JOIN products ON baskets.product_id = products.product_id WHERE baskets.user_id = $1 ORDER BY baskets.date_added`,
       [id]
     )
     .then(({ rows }) => {
@@ -15,7 +15,7 @@ exports.fetchBasket = (id) => {
     });
 };
 
-exports.addToBasket = (product_id, quantity, user_id, size) => {
+exports.addToBasket = (product_id, quantity, user_id, size, dateadded) => {
   return db
     .query(`SELECT * FROM users WHERE user_id = $1`, [user_id])
     .then(({ rows }) => {
@@ -40,8 +40,8 @@ exports.addToBasket = (product_id, quantity, user_id, size) => {
                   if (rows.length === 0) {
                     return db
                       .query(
-                        "INSERT INTO baskets (user_id, product_id, quantity, size) VALUES ($1, $2, $3, $4) RETURNING *;",
-                        [user_id, product_id, quantity, size]
+                        "INSERT INTO baskets (user_id, product_id, quantity, size, date_added) VALUES ($1, $2, $3, $4, $5) RETURNING *;",
+                        [user_id, product_id, quantity, size, dateadded]
                       )
                       .then(({ rows }) => {
                         return rows[0];
