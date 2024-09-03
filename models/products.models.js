@@ -1,7 +1,7 @@
 const db = require("../db/connection.js");
 
 exports.fetchProducts = (
-  sort_by = "productprice",
+  sort_by = "product_id",
   order = "ASC",
   size = "all"
 ) => {
@@ -12,14 +12,8 @@ exports.fetchProducts = (
         return rows;
       });
   } else {
-    let query = `SELECT * FROM products`;
-    for (let i = 0; i < size.length; i++) {
-      if (i === 0) {
-        query += ` WHERE size${size[i]} != 0`;
-      } else {
-        query += ` OR size${size[i]} != 0`;
-      }
-    }
+    let newSize = Number(size);
+    let query = `SELECT * FROM products WHERE size${newSize} != 0`;
     console.log(query);
     query += ` ORDER BY ${sort_by} ${order}`;
     return db.query(query).then(({ rows }) => {
