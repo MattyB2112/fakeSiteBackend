@@ -42,6 +42,35 @@ describe("GET /api/products", () => {
   });
 });
 
+test.only("returns a status 200 and all products available in a chosen size", () => {
+  return request(app)
+    .get("/api/products")
+    .send([5, 6, 7])
+    .expect(200)
+    .then(({ body }) => {
+      console.log(body.products);
+      // body.products.forEach((product) => {
+      //   expect(product.hasOwnProperty("productname")).toBe(true);
+      //   expect(product.hasOwnProperty("producttype")).toBe(true);
+      //   expect(product.hasOwnProperty("productcategory")).toBe(true);
+      //   expect(product.hasOwnProperty("productprice")).toBe(true);
+      //   expect(product.hasOwnProperty("size5")).toBe(true);
+      //   expect(product.hasOwnProperty("size6")).toBe(true);
+      //   expect(product.hasOwnProperty("size7")).toBe(true);
+      //   expect(product.hasOwnProperty("size8")).toBe(true);
+      //   expect(product.hasOwnProperty("size9")).toBe(true);
+      //   expect(product.hasOwnProperty("size10")).toBe(true);
+      //   expect(product.hasOwnProperty("size11")).toBe(true);
+      //   expect(product.hasOwnProperty("size12")).toBe(true);
+      //   expect(product.hasOwnProperty("productimage1")).toBe(true);
+      //   expect(product.hasOwnProperty("productimage3")).toBe(true);
+      //   expect(product.hasOwnProperty("productimage4")).toBe(true);
+      //   expect(product.hasOwnProperty("about")).toBe(true);
+      //   expect(product.hasOwnProperty("dateadded")).toBe(true);
+      // });
+    });
+});
+
 describe("GET /api/products/:product_id", () => {
   test("returns a status 200 and relevant product info", () => {
     return request(app)

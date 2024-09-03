@@ -21,6 +21,8 @@ const seed = ({ productData, usersData, basketsData }) => {
           productName VARCHAR,
           productType VARCHAR,
           productCategory VARCHAR,
+          primaryColour VARCHAR,
+          secondaryColour VARCHAR,
           productPrice DECIMAL(5,2),
           size5 INT,
           size6 INT,
@@ -72,12 +74,14 @@ const seed = ({ productData, usersData, basketsData }) => {
       );
 
       const insertProductsQueryStr = format(
-        "INSERT INTO products (productName, productType, productCategory, productPrice, size5, size6, size7, size8, size9, size10, size11, size12, productImage1, productImage2, productImage3, productImage4, about, dateAdded) VALUES %L;",
+        "INSERT INTO products (productName, productType, productCategory, primaryColour, secondaryColour, productPrice, size5, size6, size7, size8, size9, size10, size11, size12, productImage1, productImage2, productImage3, productImage4, about, dateAdded) VALUES %L;",
         formattedProductData.map(
           ({
             productName,
             productType,
             productCategory,
+            primaryColour,
+            secondaryColour,
             productPrice,
             size5,
             size6,
@@ -97,6 +101,8 @@ const seed = ({ productData, usersData, basketsData }) => {
             productName,
             productType,
             productCategory,
+            primaryColour,
+            secondaryColour,
             productPrice,
             size5,
             size6,
