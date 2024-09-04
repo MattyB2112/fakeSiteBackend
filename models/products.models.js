@@ -14,7 +14,6 @@ exports.fetchProducts = (
   } else {
     let newSize = Number(size);
     let query = `SELECT * FROM products WHERE size${newSize} != 0`;
-    console.log(query);
     query += ` ORDER BY ${sort_by} ${order}`;
     return db.query(query).then(({ rows }) => {
       return rows;
