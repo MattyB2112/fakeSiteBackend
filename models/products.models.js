@@ -12,9 +12,8 @@ exports.fetchProducts = (
         return rows;
       });
   } else {
-    let newSize = Number(size);
-    let query = `SELECT * FROM products WHERE size${newSize} != 0`;
-    query += ` ORDER BY ${sort_by} ${order}`;
+    let query = `SELECT * FROM products WHERE size${size} != 0 ORDER BY ${sort_by} ${order}`;
+    console.log(query);
     return db.query(query).then(({ rows }) => {
       return rows;
     });
