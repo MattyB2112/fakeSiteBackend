@@ -44,8 +44,7 @@ describe("GET /api/products", () => {
 
 test.only("returns a status 200 and all products available in a chosen size", () => {
   return request(app)
-    .get("/api/products")
-    .send({ size: 8 })
+    .get("/api/products/?size=8")
     .expect(200)
     .then(({ body }) => {
       console.log(body.products);
