@@ -5,6 +5,7 @@ const {
   createNewUser,
   fetchUserByEmail,
   fetchUsers,
+  updateUser,
 } = require("../models/users.models.js");
 const { convertTimestampToDateUsers } = require("../db/seeds/utils.js");
 
@@ -28,6 +29,23 @@ exports.getUserByEmail = (req, res, next) => {
   fetchUserByEmail(email)
     .then((user) => {
       res.status(200).send({ user });
+    })
+    .catch(next);
+};
+
+exports.patchUser = (req, res, next) => {
+  const newDetailsObject = ({
+    newFirstName,
+    newSurname,
+    newAddress1,
+    newAddress2,
+    newAddress3,
+    newPostcode,
+    user_id,
+  } = req.body);
+  updateUser(newDetailsObject)
+    .then((result) => {
+      res.status(201).send(result);
     })
     .catch(next);
 };

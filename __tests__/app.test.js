@@ -42,7 +42,7 @@ describe("GET /api/products", () => {
   });
 });
 
-test.only("returns a status 200 and all products available in a chosen size", () => {
+test("returns a status 200 and all products available in a chosen size", () => {
   return request(app)
     .get("/api/products/?size=8")
     .expect(200)
@@ -152,6 +152,34 @@ describe("GET /api/users/email/:email", () => {
       .expect(404)
       .then(({ body }) => {
         expect(body.message).toBe("email not found");
+      });
+  });
+});
+
+describe("PATCH /api/users/id/:user_id", () => {
+  test("Update user details", () => {
+    const newUserDetails = {
+      newFirstName: "Bob",
+      newSurname: "Johnson",
+      newAddress1: "69 LOL Road",
+      newAddress2: "London",
+      newAddress3: "England",
+      newPostcode: "IP14 8GY",
+      user_id: 1,
+    };
+    return request(app)
+      .patch("/api/users/id/1")
+      .send(newUserDetails)
+      .expect(201)
+      .then(({ body }) => {
+        body.forEach((userInfo) => {
+          expect(userInfo.userfirstname).toBe(newUserDetails.newFirstName);
+          expect(userInfo.userlastname).toBe(newUserDetails.newSurname);
+          expect(userInfo.useraddress1).toBe(newUserDetails.newAddress1);
+          expect(userInfo.useraddress2).toBe(newUserDetails.newAddress2);
+          expect(userInfo.useraddress3).toBe(newUserDetails.newAddress3);
+          expect(userInfo.userpostcode).toBe(newUserDetails.newPostcode);
+        });
       });
   });
 });

@@ -42,3 +42,22 @@ exports.createNewUser = (firstName, surname, email, password, userSince) => {
       return rows[0];
     });
 };
+
+exports.updateUser = (newDetails) => {
+  return db
+    .query(
+      "UPDATE users SET userfirstname = $1, userlastname = $2, useraddress1 = $3, useraddress2 = $4, useraddress3 = $5, userpostcode = $6 WHERE user_id = $7 RETURNING *;",
+      [
+        newDetails.newFirstName,
+        newDetails.newSurname,
+        newDetails.newAddress1,
+        newDetails.newAddress2,
+        newDetails.newAddress3,
+        newDetails.newPostcode,
+        newDetails.user_id,
+      ]
+    )
+    .then(({ rows }) => {
+      return rows;
+    });
+};

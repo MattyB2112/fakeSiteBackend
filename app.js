@@ -9,6 +9,7 @@ const {
   getUsers,
   createUser,
   getUserByEmail,
+  patchUser,
 } = require("./controllers/users.controllers.js");
 const {
   getBasket,
@@ -36,6 +37,8 @@ app.get("/api/users/id/:user_id", getUserById);
 app.get("/api/users/email/:email", getUserByEmail);
 
 app.get("/api/users/id/:user_id/basket", getBasket);
+
+app.patch("/api/users/id/:user_id/", patchUser);
 
 app.post("/api/users/id/:user_id/basket", postToBasket);
 
