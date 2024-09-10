@@ -68,7 +68,6 @@ describe("GET /api/products", () => {
       .get("/api/products/?category=Mens&size=8")
       .expect(200)
       .then(({ body }) => {
-        console.log(body);
         body.products.forEach((product) => {
           expect(product.productcategory).toBe("Mens");
           expect(product.size8).not.toBe(0);
