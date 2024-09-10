@@ -40,20 +40,30 @@ describe("GET /api/products", () => {
         });
       });
   });
-});
 
-test("returns a status 200 and all products available in a chosen size", () => {
-  return request(app)
-    .get("/api/products/?size=8")
-    .expect(200)
-    .then(({ body }) => {
-      console.log(body.products);
-      body.products.forEach((product) => {
-        expect(product.size8).not.toBe(0);
+  test("returns a status 200 and all products available in a chosen size", () => {
+    return request(app)
+      .get("/api/products/?size=8")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.products);
+        body.products.forEach((product) => {
+          expect(product.size8).not.toBe(0);
+        });
       });
-    });
+  });
+  test.only("returns a status 200 and all products available in a chosen category", () => {
+    return request(app)
+      .get("/api/products/?category=Mens")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body);
+        body.products.forEach((product) => {
+          expect(product.productcategory).toBe("Mens");
+        });
+      });
+  });
 });
-
 describe("GET /api/products/:product_id", () => {
   test("returns a status 200 and relevant product info", () => {
     return request(app)
