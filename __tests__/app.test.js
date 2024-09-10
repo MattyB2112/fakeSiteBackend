@@ -52,7 +52,7 @@ describe("GET /api/products", () => {
         });
       });
   });
-  test.only("returns a status 200 and all products available in a chosen category", () => {
+  test("returns a status 200 and all products available in a chosen category", () => {
     return request(app)
       .get("/api/products/?category=Mens")
       .expect(200)
@@ -60,6 +60,18 @@ describe("GET /api/products", () => {
         console.log(body);
         body.products.forEach((product) => {
           expect(product.productcategory).toBe("Mens");
+        });
+      });
+  });
+  test.only("returns a status 200 and all products available in a chosen category AND size", () => {
+    return request(app)
+      .get("/api/products/?category=Mens&size=8")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body);
+        body.products.forEach((product) => {
+          expect(product.productcategory).toBe("Mens");
+          expect(product.size8).not.toBe(0);
         });
       });
   });

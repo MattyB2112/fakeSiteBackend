@@ -19,13 +19,11 @@ exports.fetchProducts = (
     });
   } else if (size === "all" && category !== "all") {
     let query = `SELECT * FROM products WHERE productcategory = '${category}' ORDER BY ${sort_by} ${order}`;
-    console.log(query);
     return db.query(query).then(({ rows }) => {
       return rows;
     });
   } else {
     let query = `SELECT * FROM products WHERE productcategory = '${category}' AND size${size} != 0 ORDER BY ${sort_by} ${order}`;
-    console.log(query);
     return db.query(query).then(({ rows }) => {
       return rows;
     });

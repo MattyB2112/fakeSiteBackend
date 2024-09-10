@@ -5,7 +5,6 @@ const {
 
 exports.getProducts = (req, res, next) => {
   const { sort_by, order_by, size, category } = req.query;
-  console.log(category);
   fetchProducts(sort_by, order_by, size, category)
     .then((products) => {
       res.status(200).send({ products });
